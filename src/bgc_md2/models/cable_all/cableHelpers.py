@@ -133,6 +133,18 @@ def init_B_chunk(
     A[:, 8  , 7, :] = fromSOMtoSOM[:, 2, :]
     #)# numpy arrays elements can be assigned values, dask arrays can not be assigned
     # a. Leaf turnover
+    K[:, 0, 0, :, :] = kplant[:,0,:,:]
+    K[:, 1, 1, :, :] = kplant[:,2,:,:]
+    K[:, 2, 2, :, :] = kplant[:,1,:,:]
+    K[:, 3, 3, :, :] = C[3, :, :]*xktemp[:, :, :]*xkwater[:, :, :]*xkNlimiting[:, :, :]
+    K[:, 4, 4, :, :] = C[4, :, :]*xktemp[:, :, :]*xkwater[:, :, :]*xkNlimiting[:, :, :]
+    K[:, 5, 5, :, :] = C[5, :, :]*xktemp[:, :, :]*xkwater[:, :, :]*xkNlimiting[:, :, :]
+    K[:, 6, 6, :, :] = C[6, :, :]*xktemp[:, :, :]*xkwater[:, :, :]
+    K[:, 7, 7, :, :] = C[7, :, :]*xktemp[:, :, :]*xkwater[:, :, :]
+    K[:, 8, 8, :, :] = C[8, :, :]*xktemp[:, :, :]*xkwater[:, :, :]
+    
+    bn = A * K
+    
     bn[:, 0, 0, :, :] = - kplant[:, 0, :, :]
     #
     # b. Root turnover
